@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoLot.Samples.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250909085541_TPH")]
-    partial class TPH
+    [Migration("20250909124755_OneToMany")]
+    partial class OneToMany
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,7 +49,46 @@ namespace AutoLot.Samples.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MakeId");
+
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("AutoLot.Samples.Models.Make", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("TimeStamp")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Makes");
+                });
+
+            modelBuilder.Entity("AutoLot.Samples.Models.Car", b =>
+                {
+                    b.HasOne("AutoLot.Samples.Models.Make", "MakeNavigation")
+                        .WithMany("Cars")
+                        .HasForeignKey("MakeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MakeNavigation");
+                });
+
+            modelBuilder.Entity("AutoLot.Samples.Models.Make", b =>
+                {
+                    b.Navigation("Cars");
                 });
 #pragma warning restore 612, 618
         }

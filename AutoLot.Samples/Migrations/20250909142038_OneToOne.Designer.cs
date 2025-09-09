@@ -3,6 +3,7 @@ using AutoLot.Samples;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoLot.Samples.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250909142038_OneToOne")]
+    partial class OneToOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,31 +52,6 @@ namespace AutoLot.Samples.Migrations
                     b.HasIndex("MakeId");
 
                     b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("AutoLot.Samples.Models.Driver", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("TimeStamp")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Drivers");
                 });
 
             modelBuilder.Entity("AutoLot.Samples.Models.Make", b =>
@@ -130,21 +108,6 @@ namespace AutoLot.Samples.Migrations
                     b.ToTable("Radios");
                 });
 
-            modelBuilder.Entity("CarDriver", b =>
-                {
-                    b.Property<int>("CarsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DriversId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CarsId", "DriversId");
-
-                    b.HasIndex("DriversId");
-
-                    b.ToTable("CarDriver");
-                });
-
             modelBuilder.Entity("AutoLot.Samples.Models.Car", b =>
                 {
                     b.HasOne("AutoLot.Samples.Models.Make", "MakeNavigation")
@@ -165,21 +128,6 @@ namespace AutoLot.Samples.Migrations
                         .IsRequired();
 
                     b.Navigation("CarNavigation");
-                });
-
-            modelBuilder.Entity("CarDriver", b =>
-                {
-                    b.HasOne("AutoLot.Samples.Models.Car", null)
-                        .WithMany()
-                        .HasForeignKey("CarsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AutoLot.Samples.Models.Driver", null)
-                        .WithMany()
-                        .HasForeignKey("DriversId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("AutoLot.Samples.Models.Car", b =>

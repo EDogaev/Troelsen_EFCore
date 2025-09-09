@@ -3,9 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoLot.Samples
 {
-    public class ApplicationDbContext : DbContext
+    public partial class ApplicationDbContext : DbContext
     {
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Make> Makes { get; set; }
+        public DbSet<Radio> Radios { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -14,10 +17,11 @@ namespace AutoLot.Samples
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Обращения к Fluent API.
-            // OnModelCreatingPartial(modelBuilder);
+            //modelBuilder.Entity<BaseEntity>().ToTable("BaseEntities");
+            //modelBuilder.Entity<Car>().ToTable("Cars");
+            OnModelCreatingPartial(modelBuilder);
         }
 
-        //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
