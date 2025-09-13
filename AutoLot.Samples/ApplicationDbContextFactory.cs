@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace AutoLot.Samples
 {
+    // Хотя этот класс формально нигде не вызывается и никак не используется, фактически он вызывается инфраструктурой Entity Framework при создании миграции.
+    // При выполнении миграции инструментарий Entity Frameworkа ищет класс, который реализует интерфейс IDesignTimeDbContextFactory и который задает конфигурацию контекста.
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
         public ApplicationDbContext CreateDbContext(string[] args)
