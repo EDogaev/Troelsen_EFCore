@@ -3,6 +3,7 @@ using AutoLot.Samples;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoLot.Samples.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250912112821_AddIsDravable")]
+    partial class AddIsDravable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,6 +60,8 @@ namespace AutoLot.Samples.Migrations
                         .HasColumnType("rowversion");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "MakeId" }, "IX_Inventiry_MakeId");
 
                     b.HasIndex(new[] { "MakeId" }, "IX_Inventory_MakeId");
 
@@ -150,15 +155,15 @@ namespace AutoLot.Samples.Migrations
 
             modelBuilder.Entity("CarDriver", b =>
                 {
-                    b.Property<int>("CarId")
+                    b.Property<int>("CarsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DriverID")
+                    b.Property<int>("DriversId")
                         .HasColumnType("int");
 
-                    b.HasKey("CarId", "DriverID");
+                    b.HasKey("CarsId", "DriversId");
 
-                    b.HasIndex("DriverID");
+                    b.HasIndex("DriversId");
 
                     b.ToTable("CarDriver");
                 });
@@ -168,8 +173,8 @@ namespace AutoLot.Samples.Migrations
                     b.HasOne("AutoLot.Samples.Models.Make", "MakeNavigation")
                         .WithMany("Cars")
                         .HasForeignKey("MakeId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Inventory_Makes_MakeId");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("MakeNavigation");
                 });
@@ -189,17 +194,15 @@ namespace AutoLot.Samples.Migrations
                 {
                     b.HasOne("AutoLot.Samples.Models.Car", null)
                         .WithMany()
-                        .HasForeignKey("CarId")
+                        .HasForeignKey("CarsId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_CarDriver_Cars_CarId");
+                        .IsRequired();
 
                     b.HasOne("AutoLot.Samples.Models.Driver", null)
                         .WithMany()
-                        .HasForeignKey("DriverID")
+                        .HasForeignKey("DriversId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_CarDriver_Drivers_DriverId");
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AutoLot.Samples.Models.Car", b =>
