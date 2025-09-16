@@ -36,7 +36,7 @@ namespace AutoLot.Samples
                 // var cars = Context.Cars.ToList(); - фильтр будет всегда выводить только тот Car, у которого IsDravable = true
                 // IgnoreQueryFilters() отключает глобальный фильтр запросов.
                 // var cars = Context.Cars.IgnoreQueryFilters().ToList(); - выведет все сущности, игнорируя глобальный фильтр
-                entity.HasQueryFilter(e => e.IsDravable == true); 
+                entity.HasQueryFilter(e => e.IsDravable == true);
 
                 entity.Property(e => e.IsDravable)
                     .HasDefaultValue(true);
