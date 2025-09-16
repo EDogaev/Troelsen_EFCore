@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLot.Samples", "AutoLot.Samples\AutoLot.Samples.csproj", "{9B244BA0-61BB-4849-8F4C-A3D8E6F540FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLot.Models", "AutoLot.Models\AutoLot.Models.csproj", "{6643C8A6-803F-43D4-873D-B54BA7F230DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLot.Dal", "AutoLot.Dal\AutoLot.Dal.csproj", "{F4C3E3D0-1C86-4EF1-9FFE-1385EFB4EE5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{9B244BA0-61BB-4849-8F4C-A3D8E6F540FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B244BA0-61BB-4849-8F4C-A3D8E6F540FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B244BA0-61BB-4849-8F4C-A3D8E6F540FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6643C8A6-803F-43D4-873D-B54BA7F230DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6643C8A6-803F-43D4-873D-B54BA7F230DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6643C8A6-803F-43D4-873D-B54BA7F230DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6643C8A6-803F-43D4-873D-B54BA7F230DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4C3E3D0-1C86-4EF1-9FFE-1385EFB4EE5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4C3E3D0-1C86-4EF1-9FFE-1385EFB4EE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4C3E3D0-1C86-4EF1-9FFE-1385EFB4EE5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4C3E3D0-1C86-4EF1-9FFE-1385EFB4EE5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

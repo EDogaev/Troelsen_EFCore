@@ -11,7 +11,7 @@ namespace AutoLot.Samples
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             const string connectionString = "Server=.,5433;DataBase=AutoLot;Password=Vac_2310;User ID=sa;TrustServerCertificate=true";
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure());
             Console.WriteLine(connectionString);
             return new ApplicationDbContext(optionsBuilder.Options);
         }

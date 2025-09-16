@@ -30,6 +30,14 @@ namespace AutoLot.Samples
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasDefaultValue("Black");
+
+                // HasQueryFilter - глобальный фильтр запросов. К любым создаваемым EF Core запросам, затрагивающим сущности с глобальными
+                // фильтрами запросов, будут применяться их фильтры.
+                // var cars = Context.Cars.ToList(); - фильтр будет всегда выводить только тот Car, у которого IsDravable = true
+                // IgnoreQueryFilters() отключает глобальный фильтр запросов.
+                // var cars = Context.Cars.IgnoreQueryFilters().ToList(); - выведет все сущности, игнорируя глобальный фильтр
+                entity.HasQueryFilter(e => e.IsDravable == true); 
+
                 entity.Property(e => e.IsDravable)
                     .HasDefaultValue(true);
                 entity.Property(e => e.TimeStamp)
