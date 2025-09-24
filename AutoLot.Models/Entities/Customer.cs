@@ -1,24 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AutoLot.Models.Entities.Base;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using AutoLot.Models.Entities.Owned;
 
 namespace AutoLot.Models.Entities;
 
-public partial class Customer
+[Table("Customers", Schema = "dbo")]
+public class Customer : BaseEntity
 {
-    [Key]
-    public int Id { get; set; }
+    public Person PersonalInformation { get; set; } = new();
 
-    [StringLength(50)]
-    public string FirstName { get; set; } = null!;
+    [JsonIgnore]
+    [InverseProperty(nameof(CreditRisk.CustomerNavigation))]
+    public IEnumerable<CreditRisk> CreditRisks { get; set; } = new List<CreditRisk>();
 
-    [StringLength(50)]
-    public string LastName { get; set; } = null!;
-
-    public byte[]? TimeStamp { get; set; }
-
-    [InverseProperty("Customer")]
-    public virtual ICollection<CreditRisk> CreditRisks { get; set; } = new List<CreditRisk>();
-
-    [InverseProperty("Customer")]
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+    [JsonIgnore]
+    [InverseProperty(nameof(Order.CustomerNavigation))]
+    public IEnumerable<Order> Orders { get; set; } = new List<Order>();
 }

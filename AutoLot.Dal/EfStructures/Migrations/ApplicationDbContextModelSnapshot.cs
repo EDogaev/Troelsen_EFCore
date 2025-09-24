@@ -54,7 +54,7 @@ namespace AutoLot.Dal.EfStructures.Migrations
                     b.ToTable("CreditRisks");
                 });
 
-            modelBuilder.Entity("AutoLot.Models.Entities.Customer", b =>
+            modelBuilder.Entity("AutoLot.Models.Entities.CustomerNavigation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -169,14 +169,14 @@ namespace AutoLot.Dal.EfStructures.Migrations
 
             modelBuilder.Entity("AutoLot.Models.Entities.CreditRisk", b =>
                 {
-                    b.HasOne("AutoLot.Models.Entities.Customer", "Customer")
+                    b.HasOne("AutoLot.Models.Entities.CustomerNavigation", "CustomerNavigation")
                         .WithMany("CreditRisks")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_CreditRisks_Customers");
 
-                    b.Navigation("Customer");
+                    b.Navigation("CustomerNavigation");
                 });
 
             modelBuilder.Entity("AutoLot.Models.Entities.Inventory", b =>
@@ -198,7 +198,7 @@ namespace AutoLot.Dal.EfStructures.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Orders_Inventory");
 
-                    b.HasOne("AutoLot.Models.Entities.Customer", "Customer")
+                    b.HasOne("AutoLot.Models.Entities.CustomerNavigation", "CustomerNavigation")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -207,10 +207,10 @@ namespace AutoLot.Dal.EfStructures.Migrations
 
                     b.Navigation("Car");
 
-                    b.Navigation("Customer");
+                    b.Navigation("CustomerNavigation");
                 });
 
-            modelBuilder.Entity("AutoLot.Models.Entities.Customer", b =>
+            modelBuilder.Entity("AutoLot.Models.Entities.CustomerNavigation", b =>
                 {
                     b.Navigation("CreditRisks");
 

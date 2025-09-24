@@ -1,26 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using AutoLot.Models.Entities.Base;
+using AutoLot.Models.Entities.Owned;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AutoLot.Models.Entities;
 
-[Index("CustomerId", Name = "IX_CreditRisks_CustomerId")]
-public partial class CreditRisk
+public class CreditRisk : BaseEntity
 {
-    [Key]
-    public int Id { get; set; }
-
-    [StringLength(50)]
-    public string FirstName { get; set; } = null!;
-
-    [StringLength(50)]
-    public string LastName { get; set; } = null!;
+    public Person PersonalInformation { get; set; } = new();
 
     public int CustomerId { get; set; }
 
-    public byte[]? TimeStamp { get; set; }
-
-    [ForeignKey("CustomerId")]
-    [InverseProperty("CreditRisks")]
-    public virtual Customer Customer { get; set; } = null!;
+    [ForeignKey(nameof(CustomerId))]
+    [InverseProperty(nameof(Customer.CreditRisks))]
+    public Customer? CustomerNavigation { get; set; }
 }
