@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace AutoLot.Dal.EfStructures;
 
-public class ApplicationDbContextFactory: IDesignTimeDbContextFactory<ApplicationDbContext>
+public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
 {
     public ApplicationDbContext CreateDbContext(string[] args)
     {
