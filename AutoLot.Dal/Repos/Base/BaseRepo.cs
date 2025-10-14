@@ -112,9 +112,9 @@ public abstract class BaseRepo<T> : IRepo<T> where T : BaseEntity, new()
 
     public T? FindIgnoreQueryFilters(int? id) => Table.IgnoreQueryFilters().FirstOrDefault(x => x.Id == id);
 
-    public IEnumerable<T> GetAll() => Table;
+    public virtual IEnumerable<T> GetAll() => Table;
 
-    public IEnumerable<T> GetAllIgnoreQueryFilters() => Table.IgnoreQueryFilters();
+    public virtual IEnumerable<T> GetAllIgnoreQueryFilters() => Table.IgnoreQueryFilters();
 
     public void ExecuteQuery(string sql, object[] sqlParametersObjects) => Context.Database.ExecuteSqlRaw(sql, sqlParametersObjects);
 
