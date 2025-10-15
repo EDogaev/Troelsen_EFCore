@@ -32,7 +32,7 @@ public static class SampleDataInitializer
             var schemaName = entity.GetSchema();
 
             context.Database.ExecuteSqlRaw($"DELETE FROM {schemaName}.{tableName}");
-            context.Database.ExecuteSqlRaw($"DBCC CHECKIDENT (\"{schemaName}.{tableName}\", RESEED, 1;");
+            context.Database.ExecuteSqlRaw($"DBCC CHECKIDENT (\"{schemaName}.{tableName}\", RESEED, 1);");
         }
     }
 
