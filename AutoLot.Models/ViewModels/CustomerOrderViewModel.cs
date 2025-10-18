@@ -14,7 +14,7 @@ public class CustomerOrderViewModel
     public string? Color { get; set; }
     public string? PetName { get; set; }
     public string? Make { get; set; }
-    public bool? IsDaravable { get; set; }
+    public bool? IsDravable { get; set; }
     [NotMapped]
     public string FullDetail => $"{FirstName} {LastName} ordered a {Color} {Make} named {PetName}";
 
